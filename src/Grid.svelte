@@ -1,14 +1,16 @@
 <script lang="ts">
   import Column from "./Column.svelte";
   import {createEventDispatcher} from 'svelte';
-import type { Board, PlayerId } from "./types";
-import { COLS, PLAYERS, ROWS } from "./constants";
-import { checkWin } from "./winning";
+  import type { Board, PlayerId } from "./types";
+  import { COLS, PLAYERS, ROWS } from "./constants";
+  import { checkWin } from "./winning";
+
+  export let turn: PlayerId;
+  
   const dispatch = createEventDispatcher();
 
   const empty = () => Array.from(Array(COLS), () => ([]));
   let board: Board = empty();
-  let turn: PlayerId = 0;
 
   function handleClick(index: number) {
     if (board[index].length === ROWS) {
