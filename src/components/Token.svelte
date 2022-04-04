@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { COLORS, ROWS } from "./constants";
-  import type { PlayerId } from "./types";
-  import { drop } from "./drop";
+  import { COLORS, ROWS } from "../logic/constants";
+  import type { PlayerId } from "../logic/types";
+  import { drop } from "../logic/drop";
 
   export let token: PlayerId | undefined;
   export let pos: number;

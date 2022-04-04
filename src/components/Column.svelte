@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { ROWS } from "./constants";
+  import { ROWS } from "../logic/constants";
   import Token from "./Token.svelte";
-  import type { Column } from "./types";
+  import type { Column } from "../logic/types";
 
   export let column: Column;
 

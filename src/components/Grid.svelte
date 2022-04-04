@@ -2,9 +2,9 @@
   import { createEventDispatcher } from "svelte";
   import Column from "./Column.svelte";
   import Congrats from "./Congrats.svelte";
-  import type { Board, PlayerId } from "./types";
-  import { COLS, PLAYERS, ROWS } from "./constants";
-  import { checkWin } from "./winning";
+  import type { Board, PlayerId } from "../logic/types";
+  import { COLS, PLAYERS, ROWS } from "../logic/constants";
+  import { checkWin } from "../logic/winning";
 
   export let turn: PlayerId;
 

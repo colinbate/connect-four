@@ -1,6 +1,6 @@
 <script lang="ts">
   import Score from "./Score.svelte";
-  import type { PlayerId } from "./types";
+  import type { PlayerId } from "../logic/types";
 
   export let scores: number[];
   export let turn: PlayerId;

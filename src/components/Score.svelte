@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { COLORS } from "./constants";
-  import type { PlayerId } from "./types";
+  import { COLORS } from "../logic/constants";
+  import type { PlayerId } from "../logic/types";
 
   export let score: number;
   export let player: PlayerId;

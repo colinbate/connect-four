@@ -1,8 +1,8 @@
 <script lang="ts">
   import { fly } from "svelte/transition";
-  import { ROWS } from "./constants";
+  import { ROWS } from "../logic/constants";
   import Token from "./Token.svelte";
-  import type { PlayerId } from "./types";
+  import type { PlayerId } from "../logic/types";
 
   export let winner: PlayerId;
 </script>
