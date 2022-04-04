@@ -5,7 +5,8 @@
   export let scores: number[];
   export let turn: PlayerId;
 </script>
-<div class="w-full flex">
+
+<div class="flex w-full">
   {#each scores as score, i}
     <Score {score} player={i} current={turn === i} />
   {/each}
