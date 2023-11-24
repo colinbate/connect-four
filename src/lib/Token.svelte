@@ -1,12 +1,10 @@
 <script lang="ts">
-import { COLORS, ROWS } from "./constants";
-
-import type { PlayerId } from "./types";
-import { drop } from './drop';
-  export let token: PlayerId | undefined;
-  export let pos: number;
-  $: color = COLORS[token];
-  $: distance = (ROWS - pos) * -100;
+  import { COLORS, ROWS } from "./constants";
+  import type { PlayerId } from "./types";
+  import { drop } from './drop';
+  let {token, pos} = $props<{token?: PlayerId; pos: number;}>();
+  let color = $derived(COLORS[token ?? 0]);
+  let distance = $derived((ROWS - pos) * -100);
 </script>
 {#if token != null}
 <div in:drop={{duration: 300, delay: 200, y: distance}} class="w-full h-0 pt-[100%] rounded-full relative bg-gradient-to-br from-[rgba(255,255,255,0.2)]" style:background-color={color}>

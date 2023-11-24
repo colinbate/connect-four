@@ -1,18 +1,15 @@
 <script lang="ts">
   import Column from "./Column.svelte";
   import Congrats from "./Congrats.svelte";
-  import {createEventDispatcher} from 'svelte';
   import type { Board, PlayerId } from "./types";
   import { COLS, PLAYERS, ROWS } from "./constants";
   import { checkWin } from "./winning";
 
-  export let turn: PlayerId;
-
-  const dispatch = createEventDispatcher();
+  let { turn, onwin } = $props<{turn: PlayerId, onwin: (x: PlayerId) => void;}>();
 
   const empty = () => Array.from(Array(COLS), () => ([]));
-  let board: Board = empty();
-  let winner: PlayerId | undefined;
+  let board: Board = $state(empty());
+  let winner: PlayerId | undefined = $state(undefined);
 
   function handleClick(index: number) {
     if (winner || board[index].length === ROWS) {
@@ -21,7 +18,7 @@
     board[index] = [...board[index], turn];
     if (checkWin(board, index)) {
       winner = turn;
-      dispatch('win', { player: winner });
+      onwin(winner);
     } else {
       turn = (turn + 1) % PLAYERS;
     }
@@ -34,9 +31,9 @@
 </script>
 <div class="w-full flex border-black dark:border-white border-l relative">
   {#if winner != null}
-  <Congrats {winner} on:click={playAgain} />
+  <Congrats {winner} onclick={playAgain} />
   {/if}
   {#each board as column, i}
-    <Column {column} on:click={() => handleClick(i)} />
+    <Column {column} onclick={() => handleClick(i)} />
   {/each}
 </div>

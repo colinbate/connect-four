@@ -1,9 +1,7 @@
 <script lang="ts">
   import Score from "./Score.svelte";
   import type { PlayerId } from "./types";
-
-  export let scores: number[];
-  export let turn: PlayerId;
+  let { scores, turn } = $props<{scores: number[]; turn: PlayerId;}>();
 </script>
 <div class="w-full flex">
   {#each scores as score, i}

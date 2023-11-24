@@ -1,10 +1,11 @@
 <script lang="ts">
+  import type { MouseEventHandler } from "svelte/elements";
   import { ROWS } from "./constants";
   import Token from "./Token.svelte";
   import type { PlayerId } from "./types";
   import { fly } from 'svelte/transition';
 
-  export let winner: PlayerId;
+  let { winner, onclick } = $props<{winner: PlayerId; onclick?: MouseEventHandler<HTMLButtonElement>}>();
   
 </script>
 <div class="absolute inset-0 flex items-center justify-center z-10">
@@ -13,6 +14,6 @@
       <div class="w-1/4"><Token token={winner} pos={ROWS} /></div>
       <span class="text-3xl">You win!</span>
     </div>
-    <button on:click type="button" class="rounded py-3 px-6 bg-svelte hover:bg-gradient-to-t from-[rgba(0,0,0,0.3)]">Play Again</button>
+    <button {onclick} type="button" class="rounded py-3 px-6 bg-svelte hover:bg-gradient-to-t from-[rgba(0,0,0,0.3)]">Play Again</button>
   </div>
 </div>
