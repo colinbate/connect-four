@@ -4,4 +4,4 @@ export type Board = Column[];
 export type Point = [number, number];
 export type Vector = [number, number];
 
-export type WinEvent = CustomEvent<{player: PlayerId}>;
+export type WinEvent = CustomEvent<{ player: PlayerId }>;

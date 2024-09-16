@@ -1,16 +1,16 @@
 <script lang="ts">
+  import { createEventDispatcher } from "svelte";
   import Column from "./Column.svelte";
   import Congrats from "./Congrats.svelte";
-  import {createEventDispatcher} from 'svelte';
-  import type { Board, PlayerId } from "./types";
-  import { COLS, PLAYERS, ROWS } from "./constants";
-  import { checkWin } from "./winning";
+  import type { Board, PlayerId } from "../logic/types";
+  import { COLS, PLAYERS, ROWS } from "../logic/constants";
+  import { checkWin } from "../logic/winning";
 
   export let turn: PlayerId;
 
   const dispatch = createEventDispatcher();
 
-  const empty = () => Array.from(Array(COLS), () => ([]));
+  const empty = () => Array.from(Array(COLS), () => []);
   let board: Board = empty();
   let winner: PlayerId | undefined;
 
@@ -21,7 +21,7 @@
     board[index] = [...board[index], turn];
     if (checkWin(board, index)) {
       winner = turn;
-      dispatch('win', { player: winner });
+      dispatch("win", { player: winner });
     } else {
       turn = (turn + 1) % PLAYERS;
     }
@@ -32,9 +32,10 @@
     board = empty();
   }
 </script>
-<div class="w-full flex border-black dark:border-white border-l relative">
+
+<div class="relative flex w-full border-l border-black dark:border-white">
   {#if winner != null}
-  <Congrats {winner} on:click={playAgain} />
+    <Congrats {winner} on:click={playAgain} />
   {/if}
   {#each board as column, i}
     <Column {column} on:click={() => handleClick(i)} />
