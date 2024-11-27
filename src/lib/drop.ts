@@ -1,18 +1,16 @@
 import { bounceOut } from 'svelte/easing';
-import type {EasingFunction, TransitionConfig} from 'svelte/transition';
+import type { EasingFunction, TransitionConfig } from 'svelte/transition';
 interface DropParams {
-  delay: number;
-  duration: number;
-  easing: EasingFunction;
-  y: number;
+	delay: number;
+	duration: number;
+	easing: EasingFunction;
+	y: number;
 }
 
-export function drop(node: Element, {
-	delay = 0,
-	duration = 400,
-	easing = bounceOut,
-	y = 0,
-}: Partial<DropParams> = {}): TransitionConfig {
+export function drop(
+	node: Element,
+	{ delay = 0, duration = 400, easing = bounceOut, y = 0 }: Partial<DropParams> = {}
+): TransitionConfig {
 	const style = getComputedStyle(node);
 	const transform = style.transform === 'none' ? '' : style.transform;
 
