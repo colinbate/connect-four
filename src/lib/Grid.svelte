@@ -3,7 +3,7 @@
 	import Congrats from './Congrats.svelte';
 	import type { Board, PlayerId } from './types';
 	import { COLS, PLAYERS, ROWS } from './constants';
-	import { checkWin } from './winning';
+	import { checkDraw, checkWin } from './winning';
 
 	type Props = {
 		turn: PlayerId;
@@ -14,7 +14,8 @@
 
 	const empty = () => Array.from(Array(COLS), () => []);
 	let board: Board = $state(empty());
-	let winner: PlayerId | undefined = $state(undefined);
+	let winner: PlayerId | null = $state(null);
+	let gamestate: 'playing' | 'won' | 'draw' = $state('playing');
 
 	function handleClick(index: number) {
 		if (winner || board[index].length === ROWS) {
@@ -24,19 +25,24 @@
 		if (checkWin(board, index)) {
 			winner = turn;
 			onwin(winner);
+			gamestate = 'won';
+		} else if (checkDraw(board)) {
+			gamestate = 'draw';
+			onnext((turn + 1) % PLAYERS);
 		} else {
 			onnext((turn + 1) % PLAYERS);
 		}
 	}
 
 	function playAgain() {
-		winner = undefined;
+		winner = null;
 		board = empty();
+		gamestate = 'playing';
 	}
 </script>
 
 <div class="relative flex w-full border-l border-black dark:border-white">
-	{#if winner != null}
+	{#if gamestate === 'won' || gamestate === 'draw'}
 		<Congrats {winner} onclick={playAgain} />
 	{/if}
 	{#each board as column, i}

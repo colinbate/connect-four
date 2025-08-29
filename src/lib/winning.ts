@@ -42,3 +42,7 @@ export function checkWin(board: Board, col: number) {
 		checkVector(board, row, col, [1, -1])
 	);
 }
+
+export function checkDraw(board: Board) {
+	return board.every((col) => col.length === ROWS);
+}

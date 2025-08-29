@@ -11,8 +11,10 @@
 
 <button
 	{onclick}
-	class:cursor-not-allowed={isFull}
-	class="flex flex-grow cursor-pointer flex-col-reverse border-r border-black dark:border-white"
+	class={[
+		'flex flex-grow flex-col-reverse border-r border-black dark:border-white',
+		isFull ? `cursor-not-allowed` : `cursor-pointer`
+	]}
 >
 	{#each fullColumn as token, i}
 		<Token {token} pos={i} />
